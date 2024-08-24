@@ -1,0 +1,628 @@
+<!doctype html>
+<html id="html" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="relative min-h-screen bg-white py-24 dark:bg-body_dark dark:transition-colors dark:duration-300"
+  >
+    <div
+      id="Loader"
+      class="fixed top-0 z-20 flex h-screen w-full items-center justify-center bg-white text-center text-6xl font-bold dark:bg-body_dark dark:text-white"
+    >
+      <i class="bi bi-arrow-clockwise"></i>
+    </div>
+    <header
+      class="fixed top-0 z-10 w-full bg-white p-3 text-2xl shadow-secondary dark:bg-lighter-dark md:p-4 lg:text-xl"
+    >
+      <div class="mx-auto flex w-full items-center justify-between lg:w-3/4">
+        <i
+          onclick="sidebar_handle()"
+          class="bi bi-list block rounded px-2 py-0 shadow-primary dark:text-white dark:shadow-white md:hidden"
+        ></i>
+        <div class="group relative transition-all">
+          <a
+            href="index.html"
+            class="cursor-pointer text-2xl font-bold text-primary-color"
+            >Classor</a
+          >
+          <a
+            href="login.html"
+            class="absolute left-0 top-0 w-0 cursor-pointer overflow-hidden rounded bg-black text-lg font-bold text-white transition-all group-hover:w-[120px] group-hover:p-1 dark:bg-white dark:text-black"
+          >
+            login/signUp
+          </a>
+        </div>
+        <ul
+          class="hidden items-center justify-between gap-5 font-thin text-[#666] dark:text-white md:flex"
+        >
+          <div class="group">
+            <a
+              href="index.html"
+              class="cursor-pointer transition-all hover:text-primary-color"
+            >
+              Home
+            </a>
+            <div
+              class="min-h-[2px] w-full rounded-full bg-[#efa8a8] transition-all"
+            ></div>
+          </div>
+          <div class="group">
+            <a
+              href="courses.html"
+              class="cursor-pointer transition-all hover:text-primary-color"
+            >
+              Courses
+            </a>
+            <div
+              class="min-h-[2px] w-0 rounded-full bg-[#efa8a8] transition-all group-hover:w-full"
+            ></div>
+          </div>
+          <div class="group">
+            <a
+              href="about.html"
+              class="cursor-pointer transition-all hover:text-primary-color"
+            >
+              About
+            </a>
+            <div
+              class="min-h-[2px] w-0 rounded-full bg-[#efa8a8] transition-all group-hover:w-full"
+            ></div>
+          </div>
+          <div class="group">
+            <a
+              href="latest.html"
+              class="after:rounded after:bg-[#54a74e] after:px-1 after:text-xs after:text-white after:content-['New'] hover:text-primary-color"
+              >Latest
+            </a>
+            <div
+              class="min-h-[2px] w-0 rounded-full bg-[#efa8a8] transition-all group-hover:w-full"
+            ></div>
+          </div>
+          <!-- search course -->
+          <form
+            class="group relative flex items-center justify-center text-sm transition-all duration-500 hover:scale-110"
+          >
+            <input
+              type="text"
+              placeholder="Search.."
+              class="mt-1 w-32 rounded-lg bg-[#F0F2F5] bg-none px-5 py-1 focus-visible:outline-none group-hover:bg-[#ff7b003b] dark:group-hover:bg-[#edddb9]"
+            />
+            <i
+              class="bi bi-search absolute right-2 top-2 cursor-pointer text-black"
+            ></i>
+          </form>
+        </ul>
+        <div class="flex gap-5">
+          <button
+            class="bi bi-brightness-high-fill dark:text-white"
+            id="toggle"
+          ></button>
+          <a href="contact.html" class="bi bi-chat-text dark:text-white"></a>
+        </div>
+      </div>
+    </header>
+    <div
+      id="toaster"
+      class="absolute left-0 right-0 top-16 mx-auto flex h-0 w-0 items-center justify-center overflow-hidden rounded bg-good text-white transition-all md:top-20"
+    >
+      <p>this is a toaster</p>
+    </div>
+    <div
+      id="side-bar"
+      open="false"
+      class="fixed -left-very top-0 z-10 block h-screen w-3/4 bg-white text-black shadow-primary transition-all dark:bg-lighter-dark dark:text-white dark:shadow-white md:hidden"
+    >
+      <ul class="grid gap-5 p-3 text-xl">
+        <li onclick="sidebar_handle()" class="flex rounded text-2xl">
+          <i
+            class="bi bi-x-lg rounded px-2 py-0 shadow-primary dark:text-white dark:shadow-white"
+          ></i>
+        </li>
+        <a
+          href="index.html"
+          class="flex gap-3 rounded bg-primary-light p-2 dark:text-black"
+        >
+          <i class="bi bi-house"></i>
+          <span> Home </span>
+        </a>
+        <a href="courses.html" class="flex gap-3 rounded p-2">
+          <i class="bi bi-google-play"></i>
+          <span> Courses </span>
+        </a>
+        <a href="about.html" class="flex gap-3 rounded p-2">
+          <i class="bi bi-info-square-fill"></i>
+          <span> About </span>
+        </a>
+        <a href="latest.html" class="flex gap-3 rounded p-2">
+          <i class="bi bi-clipboard-check-fill"></i>
+          <span> Latest </span>
+        </a>
+        <a href="login.html" class="flex gap-3 rounded p-2">
+          <i class="bi bi-person-fill-add"></i>
+          <span> Login-SignUp </span>
+        </a>
+      </ul>
+    </div>
+    <button
+      id="back-to-top"
+      class="z-10 hidden text-black dark:text-white lg:hidden"
+    >
+      <i
+        class="bi bi-arrow-up-circle-fill duration-400 fixed bottom-4 right-4 z-10 cursor-pointer text-4xl transition-colors hover:text-primary-color"
+      ></i>
+    </button>
+    <div class="mx-auto w-full p-2 text-black dark:text-white lg:w-3/4">
+      <!--swiper-->
+      <div class="swiper group" id="swiper-1">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="grid w-full grid-cols-1 gap-1 md:grid-cols-3">
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/art.webp"
+                  alt="art"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/biology.webp"
+                  alt="biology"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/chemistry.webp"
+                  alt="chemistry"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/css.webp"
+                  alt="css"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/economy.webp"
+                  alt="economy"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/english.webp"
+                  alt="english"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="grid w-full grid-cols-1 gap-1 md:grid-cols-3">
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/biology.webp"
+                  alt="biology"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/economy.webp"
+                  alt="economy"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/art.webp"
+                  alt="art"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/css.webp"
+                  alt="css"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/english.webp"
+                  alt="english"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+              <a href="#" class="swiper-item relative">
+                <div class="absolute bottom-3 left-3 z-10 text-white">
+                  I am test
+                </div>
+                <img
+                  src="./assets/courses/chemistry.webp"
+                  alt="chemistry"
+                  class="col-span-1 h-64 w-full rounded object-cover"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="swiper-button-prev flex rounded bg-black shadow-secondary shadow-white transition-all hover:bg-primary-strong dark:bg-white dark:text-black lg:hidden lg:group-hover:flex"
+        ></div>
+        <div
+          class="swiper-button-next flex rounded bg-black shadow-secondary shadow-white transition-all hover:bg-primary-strong dark:bg-white dark:text-black lg:hidden lg:group-hover:flex"
+        ></div>
+      </div>
+      <!-- favorites -->
+      <section
+        id="top-courses"
+        class="my-5 p-5 shadow-primary dark:shadow-white"
+      >
+        <h2 class="topic">Top Courses</h2>
+        <div class="grid grid-cols-1 gap-3 p-2 md:grid-cols-2 lg:p-5">
+          <div class="grid grid-cols-2 items-center gap-3 font-bold">
+            <img
+              src="assets/courses/css.webp"
+              alt="css"
+              class="object-conver aspect-video w-full rounded border-2 border-white shadow-secondary transition-colors hover:border-primary-color"
+            />
+            <div>
+              <p class="text-sm md:text-xl">Lorem ipsum dolor sit amet.</p>
+              <a
+                href="#"
+                class="Just4Rows self-center text-xs text-darker-light transition-colors hover:text-primary-color lg:text-sm"
+              >
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Dolorem, assumenda.
+              </a>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 items-center gap-3 font-bold">
+            <img
+              src="assets/courses/js.webp"
+              alt="css"
+              class="object-conver aspect-video w-full rounded border-2 border-white shadow-secondary transition-colors hover:border-primary-color"
+            />
+            <div>
+              <p class="text-sm md:text-xl">Lorem ipsum dolor sit amet.</p>
+              <a
+                href="#"
+                class="Just4Rows self-center text-xs text-darker-light transition-colors hover:text-primary-color lg:text-sm"
+              >
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Dolorem, assumenda.
+              </a>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 items-center gap-3 font-bold">
+            <img
+              src="assets/courses/php.webp"
+              alt="css border-1 border-white hover:border-primary-color transition-colors"
+              class="object-conver aspect-video w-full rounded border-2 border-white shadow-secondary transition-colors hover:border-primary-color"
+            />
+            <div>
+              <p class="text-sm md:text-xl">Lorem ipsum dolor sit amet.</p>
+              <a
+                href="#"
+                class="Just4Rows self-center text-xs text-darker-light transition-colors hover:text-primary-color lg:text-sm"
+              >
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Dolorem, assumenda.
+              </a>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 items-center gap-3 font-bold">
+            <img
+              src="assets/courses/biology.webp"
+              alt="css border-1 border-white hover:border-primary-color transition-colors"
+              class="object-conver aspect-video w-full rounded border-2 border-white shadow-secondary transition-colors hover:border-primary-color"
+            />
+            <div>
+              <p class="text-sm md:text-xl">Lorem ipsum dolor sit amet.</p>
+              <a
+                href="#"
+                class="Just4Rows self-center text-xs text-darker-light transition-colors hover:text-primary-color lg:text-sm"
+              >
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Dolorem, assumenda.
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- programming guide -->
+      <section
+        id="programming-guide"
+        class="my-5 p-5 shadow-primary dark:shadow-white"
+      >
+        <h3 class="topic">Programmers Guide</h3>
+        <div class="grid grid-cols-4 py-5 lg:gap-5 xmd:gap-5">
+          <div class="col-span-4 block rounded md:col-span-2 lg:col-span-1">
+            <span class="relative my-3 font-bold text-primary-color">
+              Categories
+            </span>
+            <ul
+              class="my-2 grid gap-2 rounded border-t-1 border-solid border-body_dark p-2 dark:border-darker-light lg:p-5"
+            >
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>HTML</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>CSS</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>JS</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>JS</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>PHP</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i
+                ><span>React</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>HTML</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>CSS</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>JS</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>JS</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i><span>PHP</span>
+              </li>
+              <li
+                class="flex items-center gap-2 text-sm text-lighter-dark dark:text-darker-light"
+              >
+                <i class="bi bi-circle-fill text-[0.3rem]"></i
+                ><span>React</span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="col-span-1 hidden rounded md:col-span-2 md:block lg:col-span-1"
+          >
+            <span class="relative my-3 font-bold text-primary-color">
+              Outro
+            </span>
+            <div
+              class="my-2 flex w-full flex-col items-center justify-center gap-2 rounded border-t-1 border-solid border-body_dark p-2 pt-14 dark:border-darker-light lg:p-5"
+            >
+              <img
+                src="assets/teachers/dr_ali.webp"
+                alt="dr_ali"
+                class="aspect-square w-20 cursor-pointer rounded-full object-cover opacity-70 transition-opacity hover:opacity-100"
+              />
+              <a
+                href="index.html"
+                class="text-xl font-bold transition-colors hover:text-primary-color"
+                >Classor</a
+              >
+              <p class="text-center text-sm font-thin">
+                Learn Everyth Everywh... : |
+              </p>
+              <a
+                href="index.html"
+                class="bi bi-house-heart-fill text-4xl transition-colors hover:text-primary-color"
+              ></a>
+            </div>
+          </div>
+          <div class="hidden rounded lg:col-span-2 lg:block">
+            <span class="relative my-3 font-bold text-primary-color">
+              Courses
+            </span>
+            <div
+              class="group relative my-2 grid grid-cols-2 gap-3 rounded border-0 border-t-1 border-solid border-body_dark p-2 dark:border-darker-light lg:p-5"
+            >
+              <a href="#" class="swiper-item relative text-white">
+                <img
+                  src="assets/courses/writing.webp"
+                  alt="writing"
+                  class="z-10 h-full w-full rounded-md object-cover"
+                />
+                <div class="absolute bottom-0 z-20 block">
+                  <p class="text-xxs font-bold">Lorem ipsum dolor sit amet.</p>
+                  <div class="mb-2 grid grid-cols-3">
+                    <div class="col-span-2 flex items-center gap-2 text-xs">
+                      <p class="min-w-max">
+                        <i class="bi bi-person-circle"></i>
+                        Classor
+                      </p>
+                      <p class="hidden min-w-max xmd:block">
+                        <i class="bi bi-alarm"></i>
+                        2 Hours Ago
+                      </p>
+                    </div>
+                    <p class="justify-self-end text-xs text-primary-strong">
+                      <i class="bi bi-fire"></i>
+                      234
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="swiper-item relative text-white">
+                <img
+                  src="assets/courses/webDesign.webp"
+                  alt="webDesign"
+                  class="z-10 h-full w-full rounded-md object-cover"
+                />
+                <div class="absolute bottom-0 z-20 block">
+                  <p class="text-xxs font-bold">Lorem ipsum dolor sit amet.</p>
+                  <div class="mb-2 grid grid-cols-3">
+                    <div class="col-span-2 flex items-center gap-2 text-xs">
+                      <p class="min-w-max">
+                        <i class="bi bi-person-circle"></i>
+                        Classor
+                      </p>
+                      <p class="hidden min-w-max xmd:block">
+                        <i class="bi bi-alarm"></i>
+                        2 Hours Ago
+                      </p>
+                    </div>
+                    <p class="justify-self-end text-xs text-primary-strong">
+                      <i class="bi bi-fire"></i>
+                      234
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="swiper-item relative text-white">
+                <img
+                  src="assets/courses/react.webp"
+                  alt="React"
+                  class="z-10 h-full w-full rounded-md object-cover"
+                />
+                <div class="absolute bottom-0 z-20 block">
+                  <p class="text-xxs font-bold">Lorem ipsum dolor sit amet.</p>
+                  <div class="mb-2 grid grid-cols-3">
+                    <div class="col-span-2 flex items-center gap-2 text-xs">
+                      <p class="min-w-max">
+                        <i class="bi bi-person-circle"></i>
+                        Classor
+                      </p>
+                      <p class="hidden min-w-max xmd:block">
+                        <i class="bi bi-alarm"></i>
+                        2 Hours Ago
+                      </p>
+                    </div>
+                    <p class="justify-self-end text-xs text-primary-strong">
+                      <i class="bi bi-fire"></i>
+                      234
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="swiper-item relative text-white">
+                <img
+                  src="assets/courses/programming.webp"
+                  alt="programming"
+                  class="z-10 h-full w-full rounded-md object-cover"
+                />
+                <div class="absolute bottom-0 z-20 block">
+                  <p class="text-xxs font-bold">Lorem ipsum dolor sit amet.</p>
+                  <div class="mb-2 grid grid-cols-3">
+                    <div class="col-span-2 flex items-center gap-2 text-xs">
+                      <p class="min-w-max">
+                        <i class="bi bi-person-circle"></i>
+                        Classor
+                      </p>
+                      <p class="hidden min-w-max xmd:block">
+                        <i class="bi bi-alarm"></i>
+                        2 Hours Ago
+                      </p>
+                    </div>
+                    <p class="justify-self-end text-xs text-primary-strong">
+                      <i class="bi bi-fire"></i>
+                      234
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer
+      class="absolute bottom-0 flex w-full flex-col items-center gap-1 bg-black p-2 text-white dark:bg-lighter-dark dark:text-white"
+    >
+      <div class="flex items-center gap-3">
+        Learn Everything In Classor |
+        <div class="flex gap-2 text-red-600">
+          <i class="bi bi-suit-heart-fill"></i
+          ><span> <img src="favicon.ico" alt="icon" class="w-6" /> </span>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <a href="#" class="bi bi-youtube hover:text-primary-color"></a>
+        <a href="#" class="bi bi-instagram hover:text-primary-color"></a>
+        <a href="#" class="bi bi-telephone hover:text-primary-color"></a>
+        <a href="#" class="bi bi-telegram hover:text-primary-color"></a>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
