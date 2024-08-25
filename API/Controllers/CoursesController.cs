@@ -1,11 +1,12 @@
 using API.Models;
 using API.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-
+[AllowAnonymous]
 public class CoursesController : BaseApiController
 {
   private readonly DataContext _context;

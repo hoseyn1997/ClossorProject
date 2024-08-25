@@ -1,13 +1,42 @@
 using API.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Persistence;
 
 public class Seed
 {
-  public static async Task SeedData(DataContext context)
+  public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
   {
-    if (context.Courses.Any()) return;
+    if (!userManager.Users.Any())
+    {
+      var users = new List<AppUser>{
+        new(){
+          Displayname="Admin",
+          UserName="admin",
+          Email="admin@classor.com",
+          Bio="i'm administrator",
+        },
+        new(){
+          Displayname="Tom",
+          UserName="tom",
+          Email="tom@classor.com",
+          Bio="i'm tom",
+        },
+        new(){
+          Displayname="Bob",
+          UserName="bob",
+          Email="bob@classor.com",
+          Bio="i'm bob",
+        },
+      };
+      foreach (var user in users)
+      {
+        await userManager.CreateAsync(user, "Pa$$w0rd");
+      }
+    }
 
+
+    if (context.Courses.Any()) return;
     var courses = new List<Course>
     {
       new() {
