@@ -26,7 +26,7 @@ public class AccountController : ControllerBase
   [HttpPost("login")]
   public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
   {
-    var user = await _userManager.FindByEmailAsync(loginDto.Email);
+    var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username);
     if (user == null) return Unauthorized();
     var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
     if (result)
@@ -85,6 +85,4 @@ public class AccountController : ControllerBase
       Token = _tokenService.CreateToken(user)
     };
   }
-
-
 }

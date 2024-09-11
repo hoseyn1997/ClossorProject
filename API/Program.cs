@@ -22,11 +22,13 @@ builder.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// adding course policy
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:5501");
+        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://127.0.0.1:5500");
     });
 });
 builder.Services.AddIdentityServices(builder.Configuration);
@@ -39,6 +41,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// activate course policy
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

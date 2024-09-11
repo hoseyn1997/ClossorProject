@@ -30,6 +30,7 @@
         ></i>
         <div class="group relative transition-all">
           <a
+            id="authontication"
             href="index.html"
             class="cursor-pointer text-2xl font-bold text-primary-color"
             >Classor</a
@@ -161,6 +162,7 @@
       ></i>
     </button>
     <div
+      id="scrollable_container"
       class="mx-auto w-full p-2 text-black dark:text-white md:w-4/5 lg:w-3/4"
     >
       <section id="courses-list">
@@ -171,7 +173,7 @@
           >
             <div class="hidden gap-5 lg:grid-cols-2" id="course">
               <img
-                src="/src/assets/courses/art.webp"
+                src="./assets/courses/art.webp"
                 alt="art"
                 class="w-full object-cover"
               />
@@ -194,12 +196,14 @@
                     234
                   </p>
                 </div>
-                <p
+                <a
+                  href="#"
+                  target="_blank"
                   class="cursor-pointer text-xl font-bold text-primary-color transition-all hover:text-primary-strong"
                 >
                   My Hero Academia
-                </p>
-                <p class="text-sm">
+                </a>
+                <p class="text-lg">
                   My Hero Academia (Seasons 1-6 + Movies + OVAs + Specials)
                   1080p Dual Audio HEVC. My Hero Academia (Seasons 1-6 + Movies
                   + OVAs + Specials) 1080p Dual Audio HEVC
@@ -219,9 +223,14 @@
       </section>
       <section id="course-details" class="hidden">
         <div class="z-6">
-          <button id="back-to-courses-list">
-            <i class="bi bi-arrow-left-square-fill text-3xl text-white"></i>
-          </button>
+          <div
+            class="my-2 flex items-center gap-3 rounded bg-white px-2 text-darker-light"
+          >
+            <button id="back-to-courses-list">
+              <i class="bi bi-arrow-left-square-fill text-3xl"></i>
+            </button>
+            <span>All Courses</span>
+          </div>
           <div class="grid md:col-span-2 xl:grid-cols-3">
             <figure
               id="movie-detail-banner"
@@ -269,7 +278,7 @@
                   244 views
                 </button>
               </div>
-              <p>
+              <p class="text-lg">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Corporis ipsa facilis id, reprehenderit ducimus praesentium nemo
                 consequatur architecto optio assumenda beatae ratione? Totam,
@@ -290,7 +299,7 @@
             class="fixed left-0 top-0 z-0 h-screen w-full object-cover"
           />
           <div
-            class="z-5 fixed left-0 top-0 h-screen w-full bg-black opacity-70 transition-opacity duration-500 dark:opacity-85"
+            class="fixed left-0 top-0 z-5 h-screen w-full bg-black opacity-70 transition-opacity duration-500 dark:opacity-85"
           ></div>
         </div>
       </section>
@@ -313,6 +322,7 @@
       </div>
     </footer>
     <script src="script.js"></script>
-    <script src="courses.js"></script>
+    <script src="script/courses.js"></script>
+    <script src="script/course_details.js"></script>
   </body>
 </html>

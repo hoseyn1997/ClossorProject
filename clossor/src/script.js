@@ -3,6 +3,29 @@ let button = $.getElementById("toggle");
 let toaster = $.getElementById("toaster");
 let sidebar = $.getElementById("side-bar");
 let theme = localStorage.getItem("theme");
+let is_logged_in = false;
+let current_user = "";
+
+is_logged_in = !!localStorage.getItem("Token") ? true : false;
+
+if (is_logged_in) get_current_user();
+async function get_current_user() {
+  let headers = new Headers();
+  headers.append("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+  headers.append("Access-Control-Allow-Credentials", "true");
+  headers.append("Content-Type", "application/json");
+
+  headers.append("Authorization", `Bearer ${localStorage.getItem("Token")}`);
+  await fetch("http://localhost:5000/api/account", {
+    headers: headers,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      current_user = data.username;
+      document.getElementById("authontication").innerHTML =
+        `<p class='text-xl font-bold dark:text-white hover:scale-110 transition-all cursor-pointer'>${current_user}</p>`;
+    });
+}
 
 window.onload = function () {
   $.getElementById("Loader")?.classList.add("hidden");
@@ -56,73 +79,6 @@ let invalidUsername_items = [
 function handleUsername(e) {
   if (invalidUsername_items.includes(e.key)) {
     e.preventDefault();
-  }
-}
-
-// handle login
-function login() {
-  let login_btn = $.getElementById("login-button");
-
-  //loader open
-  login_btn.firstElementChild.classList.add("hidden");
-  login_btn.childNodes[3].classList.remove("hidden");
-  login_btn.lastElementChild.classList.add("hidden");
-
-  //toast open
-  toaster.classList.remove("h-0", "w-0");
-  toaster.classList.add("h-10", "w-36");
-  toaster.firstElementChild.innerText = "loggin successful";
-
-  setTimeout(() => {
-    //toast close
-    toaster.classList.remove("h-10", "w-36");
-    toaster.classList.add("h-0", "w-0");
-
-    //loader close
-    login_btn.firstElementChild.classList.remove("hidden");
-    login_btn.childNodes[3].classList.add("hidden");
-    login_btn.lastElementChild.classList.remove("hidden");
-  }, 2000);
-}
-//handle signUp
-function signUp() {
-  let signUp_btn = $.getElementById("signUp-button");
-
-  //loader open
-  signUp_btn.firstElementChild.classList.add("hidden");
-  signUp_btn.childNodes[3].classList.remove("hidden");
-  signUp_btn.lastElementChild.classList.add("hidden");
-
-  //open toaster
-  toaster.classList.remove("h-0", "w-0");
-  toaster.classList.add("h-10", "w-36");
-  toaster.firstElementChild.innerText = "singUp successful";
-
-  setTimeout(() => {
-    //close toaster
-    toaster.classList.remove("h-10", "w-36");
-    toaster.classList.add("h-0", "w-0");
-
-    //loader close
-    signUp_btn.firstElementChild.classList.remove("hidden");
-    signUp_btn.childNodes[3].classList.add("hidden");
-    signUp_btn.lastElementChild.classList.remove("hidden");
-  }, 2000);
-}
-function handleSignMode(predicate) {
-  let signUp = document.getElementById("signUp-form");
-  let login = document.getElementById("login-form");
-  if (predicate === "login") {
-    signUp.classList.remove("grid");
-    signUp.classList.add("hidden");
-    login.classList.remove("hidden");
-    login.classList.add("grid");
-  }
-  if (predicate === "signUp") {
-    signUp.classList.add("grid");
-    signUp.classList.remove("hidden");
-    login.classList.add("hidden");
-    login.classList.remove("grid");
   }
 }
 

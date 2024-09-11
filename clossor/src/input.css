@@ -4,7 +4,13 @@
 
 @layer components {
   .topic {
-    @apply relative font-bold text-lg after:content-[''] after:absolute after:bg-primary-color after:w-20 after:h-1 after:left-0 after:-bottom-2 before:content-[''] before:absolute before:h-0 before:w-0 before:border-r-8 before:border-r-transparent before:border-solid before:border-t-primary-color before:border-t-8 before:left-0 before:-bottom-3;
+    @apply relative text-lg font-bold before:absolute before:-bottom-3 before:left-0 before:h-0 before:w-0 before:border-r-8 before:border-t-8 before:border-solid before:border-r-transparent before:border-t-primary-color before:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-1 after:w-20 after:bg-primary-color after:content-[''];
+  }
+  .top_coursesImage {
+    @apply aspect-video w-full rounded border-2 border-white object-cover shadow-secondary transition-colors hover:border-primary-color;
+  }
+  .top_courses_description {
+    @apply self-center text-xs text-darker-light transition-colors hover:text-primary-color lg:text-lg;
   }
 }
 
@@ -41,11 +47,13 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
 }
 .Just3Rows {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
 }
